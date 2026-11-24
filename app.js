@@ -700,7 +700,8 @@ function viewWelcome() {
           <li>📚 <strong>A library</strong> of everything you want to keep</li>
           <li>🔒 <strong>Private:</strong> no account, no server; your data stays on this device</li>
         </ul>
-        <div class="row"><button class="btn" id="tryDemo" type="button">👀 Try the demo first</button></div>
+        <div class="row"><button class="btn" id="tryDemo" type="button">👀 Try the demo first</button>
+          <a class="btn" href="#pro">⭐ ${proActive ? "Pro is unlocked" : "Have an AppSumo code?"}</a></div>
       </div>
       <div class="card">
         <h3>Step ${step} of 2: ${step === 1 ? "Tell us about your business" : "Connect the AI"}</h3>
@@ -776,7 +777,17 @@ async function viewPro() {
         <p>✅ <strong>Pro is unlocked</strong> on this device.</p>${PRO_FEATURES}
         <p class="muted small">Your code is saved only on this device. To use Pro on another device, enter the same code there.</p>
         <button class="btn danger small" id="rmPro" type="button">Remove the code from this device</button>
-      </div>`;
+      </div>
+      ${ready() ? "" : `
+      <div class="card">
+        <h3>Next: choose how to start</h3>
+        <p><strong>Set up your business</strong>: add your business details and connect your Anthropic API key (the app shows you how). Takes about 3 minutes.</p>
+        <p><a class="btn primary" href="#" id="goSetup">Set up my business</a></p>
+        <p><strong>Just testing?</strong> Explore every Pro feature right now with a sample business and pre-written answers. No API key needed, and nothing is saved.</p>
+        <p><button class="btn" id="proDemo" type="button">▶ Explore Pro with the demo business</button></p>
+      </div>`}`;
+    $("#goSetup")?.addEventListener("click", (ev) => { ev.preventDefault(); location.hash = ""; route(); });
+    $("#proDemo")?.addEventListener("click", () => { store.set(K.demo, "1"); location.hash = "#tools"; });
     $("#rmPro").addEventListener("click", () => {
       if (!confirm("Remove your Pro code from this device? Keep a copy of it so you can enter it again.")) return;
       store.set(K.pro, ""); proActive = false; toast("Pro code removed"); route();
@@ -859,7 +870,7 @@ async function viewSettings() {
 function updateChrome() {
   $("#tabs").hidden = !ready();
   $("#demoBadge").hidden = !isDemo();
-  $("#proBadge").hidden = !proActive || isDemo();
+  $("#proBadge").hidden = !proActive;
   const p = getProfile();
   $("#bizLine").textContent = isDemo() ? "Exploring with a sample bakery" : ready() && p?.name ? `Working for ${p.name}` : "Your AI helper for running a small business";
 }
