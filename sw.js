@@ -1,5 +1,5 @@
 // Offline support for the app shell. Anthropic requests are never cached.
-const CACHE = "eksoch-business-assistant-v1";
+const CACHE = "eksoch-business-assistant-v2";
 const SHELL = ["./", "index.html", "styles.css", "app.js", "pro-codes.js", "tools.js", "manifest.webmanifest", "privacy.html",
   "icons/icon-192.png", "icons/icon-512.png"];
 

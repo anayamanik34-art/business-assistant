@@ -35,6 +35,18 @@ const DEMO_PROFILE = {
   currency: "INR (₹)", tone: "Warm and friendly", extra: "Orders by WhatsApp and Instagram. Delivery within 8 km.",
 };
 const mem = { chats: [], docs: [] };
+// ?demo=1&sample=1 also shows finished answers straight away (for Store/AppSumo screenshots).
+const showSample = isDemo() && startParams.get("sample") === "1";
+if (showSample) {
+  const q = Object.keys(self.DEMO_CHAT)[0];
+  mem.chats = [{ id: "sample", title: q, created: Date.now(), messages: [{ role: "user", content: q }, { role: "assistant", content: self.DEMO_CHAT[q] }] }];
+  mem.docs = [
+    ["Social media posts: Diwali gift boxes", "Social media posts", self.DEMO_ANSWERS.social],
+    ["30-day marketing plan: Diwali orders", "30-day marketing plan", self.DEMO_ANSWERS.marketing],
+    ["Customer email reply: Meera's birthday cake", "Customer email reply", self.DEMO_ANSWERS.reply],
+    [q, "Ask", self.DEMO_CHAT[q]],
+  ].map(([title, source, body], i) => ({ id: "s" + i, title, source, body, created: Date.now() - i * 86400000 }));
+}
 const getProfile = () => (isDemo() ? DEMO_PROFILE : store.json(K.profile, null));
 const getChats = () => (isDemo() ? mem.chats : store.json(K.chats, []));
 const setChats = (c) => (isDemo() ? ((mem.chats = c), true) : store.setJson(K.chats, c));
@@ -424,7 +436,7 @@ async function viewAsk(chatId) {
   ta.addEventListener("keydown", (ev) => {
     if (ev.key === "Enter" && !ev.shiftKey && !ev.isComposing) { ev.preventDefault(); form.requestSubmit(); }
   });
-  if (chat) requestAnimationFrame(() => thread.lastElementChild?.scrollIntoView({ block: "start" }));
+  if (chat && !showSample) requestAnimationFrame(() => thread.lastElementChild?.scrollIntoView({ block: "start" }));
   ta.focus();
 
   form.addEventListener("submit", async (ev) => {
@@ -597,6 +609,7 @@ async function viewTool(id) {
   $("#oCopy").onclick = () => copy(result);
   $("#oSave").onclick = () => saveDoc(title(), result, t.name);
   $("#oDown").onclick = () => download(fileSafe(title()) + ".md", `# ${title()}\n\n${result}\n`);
+  if (showSample && self.DEMO_ANSWERS[t.id]) form.requestSubmit();
 }
 
 // ===================================================================
