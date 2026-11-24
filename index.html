@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Eksoch Business Assistant</title>
+  <meta name="description" content="An AI business assistant for small businesses: answers questions and writes customer emails, social posts, marketing plans, job ads, policies and more.">
+  <meta name="theme-color" content="#241a4f">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap top">
+      <div class="brand">
+        <img src="icons/icon-192.png" width="44" height="44" alt="">
+        <div>
+          <h1>Eksoch Business Assistant</h1>
+          <p id="bizLine">Your AI helper for running a small business</p>
+        </div>
+      </div>
+      <span id="demoBadge" class="badge" hidden>Demo mode</span>
+      <span id="proBadge" class="badge" hidden>⭐ Pro</span>
+    </div>
+    <nav class="wrap tabs" id="tabs" aria-label="Sections" hidden>
+      <a href="#ask" data-page="ask">💬 Ask</a>
+      <a href="#tools" data-page="tools">🧰 Tools</a>
+      <a href="#library" data-page="library">📚 Library</a>
+      <a href="#business" data-page="business">🏢 My business</a>
+      <a href="#pro" data-page="pro">⭐ Pro</a>
+      <a href="#settings" data-page="settings">⚙️ Settings</a>
+    </nav>
+  </header>
+
+  <main class="wrap" id="main" tabindex="-1"></main>
+
+  <footer class="wrap foot">
+    <span>Your data and key stay on this device. AI answers can be wrong, so check important details. </span>
+    <a href="privacy.html">Privacy policy</a>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="pro-codes.js"></script>
+  <script src="tools.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

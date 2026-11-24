@@ -1,0 +1,21 @@
+{
+  "id": "./",
+  "name": "Eksoch Business Assistant",
+  "short_name": "Business Assistant",
+  "description": "An AI business assistant for small businesses: ask anything and get customer replies, social posts, marketing plans, job ads, policies and more, written for your business.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f7fb",
+  "theme_color": "#241a4f",
+  "lang": "en",
+  "dir": "ltr",
+  "orientation": "any",
+  "categories": ["business", "productivity"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
